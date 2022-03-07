@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,14 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
   public commodity: string;
+  private request;
+
+  public constructor(private http: HttpClient) {
+    this.request = http.get('http://localhost:5000/');
+  }
 
   public onCommodityChanged(event: any) {
-    //Make backend http call to fetch data
+    this.request.subscribe((data) => console.log(data));
   }
 
 }
